@@ -135,30 +135,26 @@
   <footer>© 2026 JES — Tutti i diritti riservati</footer>
 
   <script>
-    function nextFriday18() {
-      const now = new Date();
-      const target = new Date(now);
-      const day = target.getDay();
-      const daysUntilFriday = (5 - day + 7) % 7 || 7;
-      target.setDate(target.getDate() + daysUntilFriday);
-      target.setHours(18, 0, 0, 0);
-      
-      // Aggiunge 1 giorno extra alla scadenza
-      target.setDate(target.getDate() + 1); 
-      
+    function setTargetDate() {
+      const target = new Date();
+      // Aggiunge esattamente 1 giorno (24 ore) alla data corrente
+      target.setDate(target.getDate() + 1);
       return target;
     }
 
-    const target = nextFriday18();
+    const target = setTargetDate();
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function tick() {
       const diff = target - new Date();
       if (diff <= 0) {
-        ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+        ['days','hours','minutes','seconds'].forEach(id => {
+          document.getElementById(id).textContent = '00';
+        });
         return;
       }
+      
       document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
       document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
       document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
