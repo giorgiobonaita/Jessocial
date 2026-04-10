@@ -52,7 +52,6 @@
       margin-bottom: 2.2rem;
     }
 
-    /* Countdown box */
     .countdown-wrap {
       border: 2px solid #ff6a00;
       border-radius: 16px;
@@ -112,12 +111,12 @@
 
   <div class="countdown-wrap">
     <div class="cd-block">
-      <span class="cd-num" id="days">00</span>
+      <span class="cd-num" id="days">01</span>
       <span class="cd-label">Giorni</span>
     </div>
     <div class="cd-sep">:</div>
     <div class="cd-block">
-      <span class="cd-num" id="hours">00</span>
+      <span class="cd-num" id="hours">03</span>
       <span class="cd-label">Ore</span>
     </div>
     <div class="cd-sep">:</div>
@@ -135,31 +134,37 @@
   <footer>© 2026 JES — Tutti i diritti riservati</footer>
 
   <script>
-    function setTargetDate() {
-      const target = new Date();
-      // Aggiunge esattamente 1 giorno e 3 ore al momento attuale
-      target.setDate(target.getDate() + 1);
-      target.setHours(target.getHours() + 3);
+    function getTarget() {
+      const now = new Date();
+      // Calcolo: Adesso + 1 giorno (24h) + 3 ore = +27 ore totali
+      const target = new Date(now.getTime() + (27 * 60 * 60 * 1000));
       return target;
     }
 
-    const target = setTargetDate();
+    const targetDate = getTarget();
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function tick() {
-      const diff = target - new Date();
+      const now = new Date();
+      const diff = targetDate - now;
+
       if (diff <= 0) {
         ['days','hours','minutes','seconds'].forEach(id => {
           document.getElementById(id).textContent = '00';
         });
         return;
       }
-      
-      document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
-      document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
-      document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
-      document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent    = pad(d);
+      document.getElementById('hours').textContent   = pad(h);
+      document.getElementById('minutes').textContent = pad(m);
+      document.getElementById('seconds').textContent = pad(s);
     }
 
     tick();
