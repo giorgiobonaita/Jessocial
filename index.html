@@ -142,6 +142,10 @@
       const daysUntilFriday = (5 - day + 7) % 7 || 7;
       target.setDate(target.getDate() + daysUntilFriday);
       target.setHours(18, 0, 0, 0);
+      
+      // Aggiunge 1 giorno extra alla scadenza
+      target.setDate(target.getDate() + 1); 
+      
       return target;
     }
 
