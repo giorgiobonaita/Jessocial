@@ -52,7 +52,6 @@
       margin-bottom: 2.2rem;
     }
 
-    /* Countdown box */
     .countdown-wrap {
       border: 2px solid #ff6a00;
       border-radius: 16px;
@@ -135,14 +134,23 @@
   <footer>© 2026 JES — Tutti i diritti riservati</footer>
 
   <script>
-    function setTargetDate() {
-      const target = new Date();
-      // Aggiunge esattamente 1 giorno (24 ore) alla data corrente
-      target.setDate(target.getDate() + 1);
+    function getUpdatedTarget() {
+      const now = new Date();
+      const target = new Date(now);
+      const day = target.getDay();
+      
+      // Calcola il venerdì
+      const daysUntilFriday = (5 - day + 7) % 7 || 7;
+      target.setDate(target.getDate() + daysUntilFriday);
+      target.setHours(18, 0, 0, 0);
+
+      // SOTTRATTI 7 GIORNI
+      target.setDate(target.getDate() - 7); 
+
       return target;
     }
 
-    const target = setTargetDate();
+    const target = getUpdatedTarget();
 
     function pad(n) { return String(n).padStart(2, '0'); }
 
