@@ -1,0 +1,23 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/auth/page": "/auth",
+  "/favicon.ico/route": "/favicon.ico",
+  "/forgot-password/page": "/forgot-password",
+  "/home/page": "/home",
+  "/legal/privacy/page": "/legal/privacy",
+  "/legal/termini/page": "/legal/termini",
+  "/login/email/page": "/login/email",
+  "/login/page": "/login",
+  "/onboarding/age/page": "/onboarding/age",
+  "/onboarding/categories/page": "/onboarding/categories",
+  "/onboarding/friends/page": "/onboarding/friends",
+  "/onboarding/name/page": "/onboarding/name",
+  "/onboarding/photo/page": "/onboarding/photo",
+  "/onboarding/role/page": "/onboarding/role",
+  "/onboarding/username/page": "/onboarding/username",
+  "/page": "/",
+  "/post/[id]/page": "/post/[id]",
+  "/reset-password/page": "/reset-password",
+  "/signup/page": "/signup"
+}
